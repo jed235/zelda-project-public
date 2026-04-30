@@ -1,7 +1,6 @@
 // Vendor
 import { Pane } from 'tweakpane'
 import * as EssentialsPlugin from '@tweakpane/plugin-essentials'
-import * as TweakpanePluginMedia from 'tweakpane-plugin-media'
 
 // Modules
 // import EventDispatcher from '@/js/modules/EventDispatcher'
@@ -117,7 +116,10 @@ class Debugger {
       localStorage.setItem('debugger-expanded', expanded)
     })
     pane.registerPlugin(EssentialsPlugin)
-    pane.registerPlugin(TweakpanePluginMedia)
+    
+    // Note: tweakpane-plugin-media is optional and may not be available
+    // in production builds. The Essentials plugin provides sufficient functionality.
+    
     return pane
   }
 

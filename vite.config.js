@@ -5,13 +5,27 @@ import * as path from 'path'
 export default ({ mode }) => {
   return defineConfig({
     root: 'src',
-    base: mode === 'development' ? '/zelda-project-public/' : './', // for Github pages, otherwise use './'
+    base: mode === 'development' ? '/' : './',
     build: {
       outDir: '../dist',
-      sourcemap: true,
+      sourcemap: mode === 'development',
+      minify: mode === 'production' ? 'terser' : false,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            three: ['three'],
+            gsap: ['gsap'],
+          },
+        },
+      },
     },
     server: {
-      host: true, // to test on other devices with IP address
+      host: true,
+      port: 5173,
+    },
+    preview: {
+      port: 4173,
+      host: true,
     },
     resolve: {
       alias: {
